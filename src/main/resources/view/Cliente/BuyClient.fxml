@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.ispw.view.graphicalcontroller.cliente.BuyClienteController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4002b" height="574.0" layoutX="13.0" layoutY="13.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="42.0" />
+      <ImageView fx:id="impID" fitHeight="23.0" fitWidth="23.0" layoutX="23.0" layoutY="23.0" onDragDetected="#onImpostazioni" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/menu-burger.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="homeID" fitHeight="23.0" fitWidth="23.0" layoutX="23.0" layoutY="65.0" onDragDetected="#onPaginaPrincipale" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="carrelloID" fitHeight="23.0" fitWidth="23.0" layoutX="23.0" layoutY="107.0" onDragDetected="#onCarrello" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/shopping-bag.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="23.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/exit.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="onButtonSet" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#onImpostazioni" opacity="0.0" prefHeight="41.0" prefWidth="44.0" />
+      <Button fx:id="onButtonHome" layoutX="12.0" layoutY="56.0" mnemonicParsing="false" onAction="#onPaginaPrincipale" opacity="0.0" prefHeight="41.0" prefWidth="44.0" />
+      <Button fx:id="onButtonBag" layoutX="12.0" layoutY="98.0" mnemonicParsing="false" onAction="#onCarrello" opacity="0.0" prefHeight="41.0" prefWidth="44.0" />
+      <Button fx:id="onButtonOut" layoutX="12.0" layoutY="544.0" mnemonicParsing="false" opacity="0.0" prefHeight="41.0" prefWidth="44.0" />
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="350.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Media_Globe_Logo.png" />
+         </image>
+      </ImageView>
+      <Line endX="700.9482421875" layoutX="181.0" layoutY="131.0" opacity="0.61" startX="-100.0" />
+      <TableView fx:id="tableViewProdotto" layoutX="81.0" layoutY="148.0" prefHeight="385.0" prefWidth="550.0" style="-fx-background-radius: 15;">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="45.0" text="ID" />
+            <TableColumn fx:id="nome" prefWidth="220.0" text="name" />
+            <TableColumn fx:id="prezzo" prefWidth="283.0" text="Price" />
+         </columns>
+      </TableView>
+      <Label layoutX="80.0" layoutY="69.0" prefHeight="56.0" prefWidth="267.0" text="Shopping Cart" textFill="#e4002b">
+         <font>
+            <Font name="System Bold" size="39.0" />
+         </font>
+      </Label>
+      <Pane layoutX="650.0" layoutY="349.0" prefHeight="226.0" prefWidth="236.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+         <children>
+            <ChoiceBox fx:id="methodShip" layoutX="106.0" layoutY="49.0" prefHeight="24.0" prefWidth="91.0" />
+            <Text fill="#656464" layoutX="28.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prize">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="prize" layoutX="439.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="97.0517578125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="coupon" layoutX="106.0" layoutY="92.0" prefHeight="24.0" prefWidth="91.0" />
+            <Text fill="#656464" layoutX="28.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ship">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#656464" layoutX="28.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coupon">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="prize12" layoutX="258.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="186.0517578125">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+            <Button fx:id="buy1" layoutX="33.0" layoutY="187.0" mnemonicParsing="false" onAction="#buyAllIntoCart" prefHeight="25.0" prefWidth="170.0">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/shopping-bag.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Text fill="#e4002b" layoutX="28.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Summary">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Label fx:id="totalPriceLabel" layoutX="106.0" layoutY="134.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="842.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/download.jpeg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="650.0" layoutY="148.0" prefHeight="88.0" prefWidth="236.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+         <children>
+            <ChoiceBox fx:id="shipping1" layoutX="106.0" layoutY="49.0" prefHeight="24.0" prefWidth="91.0" />
+            <Text fx:id="prize123" layoutX="439.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="97.0517578125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#656464" layoutX="28.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="prize11" layoutX="258.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="186.0517578125">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+            <Text fx:id="prize21" layoutX="89.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="196.0517578125">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+            <Text fill="#e4002b" layoutX="28.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping address">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="650.0" layoutY="248.0" prefHeight="88.0" prefWidth="236.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+         <children>
+            <ChoiceBox fx:id="card" layoutX="106.0" layoutY="49.0" prefHeight="24.0" prefWidth="91.0" />
+            <Text fx:id="prize1" layoutX="439.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="97.0517578125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#656464" layoutX="28.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#e4002b" layoutX="28.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Card">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Button fx:id="remove" layoutX="271.0" layoutY="541.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="170.0" text="remove" />
+      <ImageView fitHeight="26.0" fitWidth="34.0" layoutX="22.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/icons8-message-32.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="onButtonBag1" layoutX="13.0" layoutY="140.0" mnemonicParsing="false" onAction="#onMessaggi" opacity="0.0" prefHeight="41.0" prefWidth="44.0" />
+   </children>
+</AnchorPane>

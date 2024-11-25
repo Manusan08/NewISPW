@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.ispw.view.graphicalcontroller.LoginViewController1">
+   <AnchorPane prefHeight="400.0" prefWidth="274.0" style="-fx-background-color: #E4002B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="50.0" fitWidth="242.0" layoutX="21.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../images/Media_Globe_Logo.png" />
+      </ImageView>
+   </AnchorPane>
+   <Pane layoutX="300.0" layoutY="37.0" prefHeight="498.0" prefWidth="542.0" AnchorPane.bottomAnchor="65.40000000000009" AnchorPane.topAnchor="37.0">
+      <TextField fx:id="txtUsername" layoutX="131.0" layoutY="129.0" prefHeight="34.0" prefWidth="280.0" promptText="Username or email" />
+      <PasswordField fx:id="txtPassword" layoutX="131.0" layoutY="179.0" prefHeight="34.0" prefWidth="280.0" promptText="Password" stylesheets="@../../Projects/ISPW/src/main/resources/styling/fullpackstyling.css" />
+      <Button fx:id="btnSignin" layoutX="271.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="140.0" stylesheets="@../../Projects/ISPW/src/main/resources/styling/fullpackstyling.css" text="Sign in" />
+      <Label fx:id="btnForgot" alignment="CENTER" layoutX="131.0" layoutY="234.0" prefHeight="23.0" prefWidth="120.0" text="Forgot Password?" textFill="#5383ff">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSignup" layoutX="131.0" layoutY="299.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="280.0" stylesheets="@../../Projects/ISPW/src/main/resources/styling/fullpackstyling.css" text="Sign up" />
+      <Separator layoutX="131.0" layoutY="284.0" prefHeight="4.0" prefWidth="280.0" />
+      <Label alignment="CENTER" layoutX="256.0" layoutY="274.0" prefHeight="23.0" prefWidth="30.0" style="-fx-background-color: #fff;" text="Or" textFill="#5b5a5a">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblErrors" alignment="CENTER" layoutX="131.0" layoutY="204.0" prefHeight="23.0" prefWidth="280.0" textFill="#ff6354">
+         <font>
+            <Font name="Segoe UI" size="10.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="88.0" layoutX="246.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../images/download.jpeg" />
+      </ImageView>
+   </Pane>
+   <Label alignment="CENTER" layoutX="300.0" layoutY="10.0" prefHeight="38.0" prefWidth="300.0" text="Login" textFill="#FFFFFF">
+      <font>
+         <Font name="Segoe UI Bold" size="31.0" />
+      </font>
+   </Label>
+</AnchorPane>
