@@ -48,7 +48,7 @@ Si possono specificare entrambe le scelte direttamente dal file _config.properti
 
 ### Livelli di persistenza
 * **DBMS**: sarà necessario creare lo schema (cartella _.../sql_)
-* **File System**: i dati saranno salvati in  file _.csv_ all'interno dell'apposita cartella (_.../csv_)
+* **File System**: i dati saranno salvati in file _.csv_ all'interno dell'apposita cartella (_.../csv_)
 
 ### Interfacce grafiche
 * **JavaFx**
