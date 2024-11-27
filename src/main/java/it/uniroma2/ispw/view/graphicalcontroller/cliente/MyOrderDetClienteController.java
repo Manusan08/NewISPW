@@ -27,7 +27,7 @@ import java.util.List;
 public class MyOrderDetClienteController extends ControllerGrafico {
     private UserBean userBean;
     private List<ProdottoBean> prodottoBeans;
-    private OrdineBean ordineBean;
+
     @FXML
     private ImageView carrelloID;
 
@@ -66,6 +66,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
     private final ClienteFacade clienteFacade = new ClienteFacade();
 
     public MyOrderDetClienteController() throws IOException {
+        // da fare
     }
 
     @FXML
@@ -107,7 +108,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
 
     @Override
     public void setOrdineBean(OrdineBean ordineBean){
-        this.ordineBean=ordineBean;
+
 
         prodottoBeans=clienteFacade.getMyOrderProd(userBean, ordineBean);
 

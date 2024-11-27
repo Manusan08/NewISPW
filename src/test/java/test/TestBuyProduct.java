@@ -14,10 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.testng.Assert.assertEquals;
 
-public class TestBuyProduct {
+class TestBuyProduct {
     private ClienteFacade clienteFacade;
     private ProdottoBean prodottoBean;
     private UserBean userBean;
@@ -35,7 +33,8 @@ public class TestBuyProduct {
         prodottoBean.setPrezzo(1322);
         prodottoBean.setDescrizione("molto bello");
 
-        userBean = new UserBean();
+        userBean = new UserBean()
+        ;
         userBean.setEmail("cliente1");
         userBean.setNome("Giacomini");
     }

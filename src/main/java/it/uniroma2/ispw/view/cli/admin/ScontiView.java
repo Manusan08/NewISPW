@@ -9,6 +9,7 @@ import it.uniroma2.ispw.view.cli.TemplateView;
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class ScontiView extends TemplateView {
@@ -17,12 +18,12 @@ public class ScontiView extends TemplateView {
 
     @Override
     public void control() throws SystemException, IOException, LoginException, ItemNotFoundException, SQLException, CampiVuotiExeption {
-        
+        //da fare
     }
 
     @Override
     protected List<String> getOptions() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

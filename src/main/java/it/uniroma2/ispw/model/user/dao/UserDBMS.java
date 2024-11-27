@@ -27,7 +27,7 @@ public class UserDBMS implements  UserDAO{
         ResultSet resultSet = null;
 
         try (Connection conn = ConnectionDB.getConnection()){
-            String sql = "select * from pagamento where Utenti_email=? ;";
+            String sql = "select idpagamento, metodo, Utenti_email from pagamento where Utenti_email=? ;";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
 
@@ -54,7 +54,7 @@ public class UserDBMS implements  UserDAO{
         ResultSet resultSet = null;
 
         try (Connection conn = ConnectionDB.getConnection()){
-            String sql = "select * from indirizzo where Utenti_email=? ;";
+            String sql = "select idindirizzo, via , Utenti_email from indirizzo where Utenti_email=? ;";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
 
@@ -81,7 +81,7 @@ public class UserDBMS implements  UserDAO{
         UserModel userModel;
 
         try (Connection conn = ConnectionDB.getConnection()){
-            String sql = "select * from Utenti  where email=? ;";
+            String sql = "select nascita, nome , cognome, role, email from Utenti  where email=? ;";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
 

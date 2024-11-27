@@ -1,6 +1,6 @@
 package test;
 
-import it.uniroma2.ispw.bean.LoginBean;
+
 import it.uniroma2.ispw.model.login.LoginModel;
 import it.uniroma2.ispw.model.login.dao.LoginDAO;
 import it.uniroma2.ispw.model.login.dao.LoginDBMS;
