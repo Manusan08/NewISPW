@@ -53,7 +53,7 @@ public abstract class TemplateView {
 
         // Calcolare la larghezza della formattazione e utilizzarla direttamente nel formato
         int padding = (width + headerText.length()) / 2;
-        System.out.printf("%" + padding + "s%n", headerText);
+        System.out.printf(headerText, padding);
 
         System.out.printf("%s%s%n", border, ANSI_RESET);
     }
@@ -122,13 +122,13 @@ public abstract class TemplateView {
             columnWidths.add(maxWidth);
         }
 
-        printTableHeader(headers, columnWidths);
+        printTableHeader( columnWidths);
 
         // Print rows
 
     }
 
-    private void printTableHeader(List<String> headers, List<Integer> columnWidths) {
+    private void printTableHeader( List<Integer> columnWidths) {
 
         System.out.println();
 
