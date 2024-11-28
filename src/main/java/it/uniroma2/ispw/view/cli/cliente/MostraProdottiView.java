@@ -30,7 +30,7 @@ public class MostraProdottiView {
     public void control() throws SystemException, IOException, ItemNotFoundException, SQLException, CampiVuotiExeption, LoginException {
         do {
             // Mostra i prodotti
-            printHeader("Elenco Prodotti Disponibili");
+            printHeader();
             printTable(prodottoBeans);
 
             // Aggiungi l'opzione per tornare alla ClienteView
@@ -59,13 +59,14 @@ public class MostraProdottiView {
         } while (loopCond);  // Continua finché non si seleziona '0'
     }
 
-    private void printHeader(String headerText) {
+    private void printHeader() {
         int width = 50;
         String border = "-".repeat(width);
 
         System.out.printf("%n%s%n", border);
-        int leftPadding = (width - headerText.length()) / 2;
-        System.out.printf("%" + leftPadding + "s%s%n", "", headerText);
+        int leftPadding = (width - "Elenco Prodotti Disponibili".length()) / 2;
+        System.out.printf("%" + (leftPadding + "Elenco Prodotti Disponibili".length()) + "s%n", "Elenco Prodotti Disponibili");
+
         System.out.printf("%s%n", border);
     }
 
