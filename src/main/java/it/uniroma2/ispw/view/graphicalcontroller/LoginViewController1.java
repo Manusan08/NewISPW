@@ -7,7 +7,7 @@ import it.uniroma2.ispw.enums.Role;
 import it.uniroma2.ispw.utils.ChangePage;
 import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
-import it.uniroma2.ispw.utils.exception.textexpt;
+import it.uniroma2.ispw.utils.exception.TexText;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,7 +60,7 @@ public class LoginViewController1 implements Initializable{
             getAlert("Credenziali errate o utente inesistente").showAndWait();
         } catch (SystemException | IOException e) {
             getAlert("qualcosa è andato storto").showAndWait();
-        } catch (textexpt e) {
+        } catch (TexText e) {
             throw new RuntimeException(e);
         }
 

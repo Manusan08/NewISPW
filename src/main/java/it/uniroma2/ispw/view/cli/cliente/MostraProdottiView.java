@@ -34,7 +34,7 @@ public class MostraProdottiView {
             printTable(prodottoBeans);
 
             // Aggiungi l'opzione per tornare alla ClienteView
-            System.out.println("Seleziona un prodotto per aggiungerlo al carrello oppure premi '0' per tornare alla ClienteView.");
+            System.out.printf("Seleziona un prodotto per aggiungerlo al carrello oppure premi '0' per tornare alla ClienteView.%n");
 
             // Chiedi la scelta dell'utente
             int choice = userChoice();
@@ -53,7 +53,7 @@ public class MostraProdottiView {
                 // Aggiorna la lista dei prodotti disponibili
                 prodottoBeans = clienteFacade.getAllProdDisp();
             } else {
-                System.out.println("Selezione non valida. Riprova.");
+                System.out.printf("Selezione non valida. Riprova.%n");
             }
 
         } while (loopCond);  // Continua finché non si seleziona '0'
@@ -61,35 +61,31 @@ public class MostraProdottiView {
 
     private void printHeader(String headerText) {
         int width = 50;
-        String border = new String(new char[width]).replace("\0", "-");
+        String border = "-".repeat(width);
 
-        System.out.println();
-        System.out.println(border);
+        System.out.printf("%n%s%n", border);
         int leftPadding = (width - headerText.length()) / 2;
-        for (int i = 0; i < leftPadding; i++) {
-            System.out.print(" ");
-        }
-        System.out.println(headerText);
-        System.out.println(border);
+        System.out.printf("%" + leftPadding + "s%s%n", "", headerText);
+        System.out.printf("%s%n", border);
     }
 
     private int userChoice() {
         // Stampa il menu delle opzioni
-        System.out.println("\n--- Come vuoi procedere? ---");
+        System.out.printf("%n--- Come vuoi procedere? ---%n");
         System.out.println("1) Aggiungi al carrello");
 
         int choice = -1;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         do {
-            System.out.print("Scegli un prodotto (1-" + prodottoBeans.size() + ") o premi '0' per tornare: ");
+            System.out.printf("Scegli un prodotto (1-%d) o premi '0' per tornare: ", prodottoBeans.size());
             try {
                 choice = Integer.parseInt(reader.readLine());
                 if (choice < 0 || choice > prodottoBeans.size()) {
-                    System.out.println("Selezione non valida. Riprova.");
+                    System.out.printf("Selezione non valida. Riprova.%n");
                     choice = -1;  // Imposta un valore non valido
                 }
             } catch (IOException | NumberFormatException e) {
-                System.out.println("Errore nell'input. Riprova.");
+                System.out.printf("Errore nell'input. Riprova.%n");
                 choice = -1;
             }
         } while (choice == -1);  // Continua a chiedere finché non viene fatta una scelta valida
@@ -99,17 +95,17 @@ public class MostraProdottiView {
 
     private void printTable(List<ProdottoBean> list) {
         if (list.isEmpty()) {
-            System.out.println("\033[31mNessun prodotto disponibile.\033[0m");
+            System.out.printf("\033[31mNessun prodotto disponibile.\033[0m%n");
             return;
         }
 
         // Stampa l'intestazione della tabella
-        System.out.printf("\033[36m%-5s %-10s %-10s %-10s %-20s %-20s\033[0m\n", "ID", "Stato", "Prezzo", "ProdottoID", "Categoria", "NomeProdotto");
+        System.out.printf("\033[36m%-5s %-10s %-10s %-10s %-20s %-20s\033[0m%n", "ID", "Stato", "Prezzo", "ProdottoID", "Categoria", "NomeProdotto");
 
         // Stampa i prodotti numerati con il loro ID
         for (int i = 0; i < list.size(); i++) {
             ProdottoBean prodotto = list.get(i);
-            System.out.printf("\033[32m%-5d %-10s %-10s %-10s %-20s %-20s\033[0m\n",
+            System.out.printf("\033[32m%-5d %-10s %-10s %-10s %-20s %-20s\033[0m%n",
                     i + 1,  // Numerazione dei prodotti
                     prodotto.getStato(),
                     prodotto.getPrezzo(),
@@ -122,6 +118,6 @@ public class MostraProdottiView {
     private void addToCart(ProdottoBean prodotto) {
         // Aggiungi il prodotto al carrello
         clienteFacade.addToCart(prodotto, usrBean);
-        System.out.println("Prodotto aggiunto al carrello: " + prodotto.getNomeProdotto());
+        System.out.printf("Prodotto aggiunto al carrello: %s%n", prodotto.getNomeProdotto());
     }
 }

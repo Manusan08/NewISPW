@@ -3,7 +3,7 @@ package it.uniroma2.ispw.view.graphicalcontroller.cliente;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
 import it.uniroma2.ispw.utils.exception.SystemException;
-import it.uniroma2.ispw.utils.exception.textexpt;
+import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.view.graphicalcontroller.ControllerGrafico;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,7 +60,7 @@ public class MessaggiPageController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-        } catch (SystemException | textexpt e) {
+        } catch (SystemException | TexText e) {
             throw new RuntimeException(e);
         }
     }
@@ -76,7 +76,7 @@ public class MessaggiPageController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-        } catch (SystemException | textexpt e) {
+        } catch (SystemException | TexText e) {
             throw new RuntimeException(e);
         }
     }
@@ -92,7 +92,7 @@ public class MessaggiPageController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-        } catch (SystemException | textexpt e) {
+        } catch (SystemException | TexText e) {
             throw new RuntimeException(e);
         }
     }

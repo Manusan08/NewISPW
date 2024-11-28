@@ -2,7 +2,7 @@ package it.uniroma2.ispw.model.user;
 
 import it.uniroma2.ispw.enums.Role;
 
-import java.util.Date;
+
 import java.util.List;
 
 public class UserModel {

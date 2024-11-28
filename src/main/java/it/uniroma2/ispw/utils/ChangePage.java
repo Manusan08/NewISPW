@@ -7,7 +7,7 @@ import it.uniroma2.ispw.bean.ProdottoBean;
 import it.uniroma2.ispw.bean.UserBean;
 
 import it.uniroma2.ispw.utils.exception.SystemException;
-import it.uniroma2.ispw.utils.exception.textexpt;
+import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.view.graphicalcontroller.ControllerGrafico;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,24 +32,24 @@ public class ChangePage {
     }
 
     private Stage stage;
-    public void cambiaPagina(String s, UserBean userBean, List<ProdottoBean> selectedProdotto) throws SystemException, textexpt {
+    public void cambiaPagina(String s, UserBean userBean, List<ProdottoBean> selectedProdotto) throws SystemException, TexText {
         cambiaPagina(s, userBean,  selectedProdotto, null, null);
     }
-    public void cambiaPagina(String s, UserBean userBean, OrdineBean ordineBean) throws SystemException, textexpt {
+    public void cambiaPagina(String s, UserBean userBean, OrdineBean ordineBean) throws SystemException, TexText {
         cambiaPagina(s, userBean,  null, null, ordineBean);
     }
-    public void cambiaPagina(String s, UserBean userBean) throws SystemException, textexpt {
+    public void cambiaPagina(String s, UserBean userBean) throws SystemException, TexText {
         cambiaPagina(s, userBean, null, null, null);
     }
 
-    public void cambiaPagina(String fxml, UserBean cred, List<ProdottoBean> prodottoBeans, ProdottoBean pb, OrdineBean ordineBean) throws SystemException, textexpt {
+    public void cambiaPagina(String fxml, UserBean cred, List<ProdottoBean> prodottoBeans, ProdottoBean pb, OrdineBean ordineBean) throws SystemException, TexText {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
         Scene scene = null;
 
         try {
             scene = new Scene(loader.load(), 900, 600);
         } catch (IOException e) {
-            throw new textexpt(e);
+            throw new TexText(e);
         }
         ControllerGrafico controller = loader.getController();    //Uso del polimorfismo, uso una variabile di tipo ControllerGrafico (superclasse)
         controller.inizializza(cred);

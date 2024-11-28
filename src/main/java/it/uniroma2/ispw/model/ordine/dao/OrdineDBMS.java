@@ -17,42 +17,54 @@ import java.util.List;
 public class OrdineDBMS implements OrdineDAO{
     public void compra(OrdineModel ordineModel) {
         try (Connection conn = ConnectionDB.getConnection()) {
-            // Inserisci i dettagli dell'ordine nella tabella 'ordine'
-            String ordineSql = "INSERT INTO dettagliordine (ordineID, emailCliente, pagamento, indirizzo, coupon, prezzo,dataAcquisto) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, CURRENT_DATE)";
-            String idOrdine = RandomStringUtils.randomAlphanumeric(8); // Genera un ID ordine casuale
+            // Inserisci i dettagli dell'ordine
+            String idOrdine = salvaDettagliOrdine(conn, ordineModel);
 
-            try (PreparedStatement ordineStatement = conn.prepareStatement(ordineSql)) {
-                ordineStatement.setString(1, idOrdine);
-                ordineStatement.setString(2, ordineModel.getEmailCliente());
-                ordineStatement.setString(3, ordineModel.getPagamento());
-                ordineStatement.setString(4, ordineModel.getIndirizzo());
-                ordineStatement.setString(5, ordineModel.getCoupon());
-                ordineStatement.setDouble(6, ordineModel.getPrezzotot());
-                ordineStatement.executeUpdate();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            // Inserisci i dettagli dei prodotti venduti nella tabella 'prodotti_venduti'
-            String prodottiSql = "INSERT INTO ordine_prodotto (dettagliOrdine_ordineID, prodottoID, nome, prezzo) " +
-                    "VALUES (?, ?, ?, ?)";
-            try (PreparedStatement prodottiStatement = conn.prepareStatement(prodottiSql)) {
-                for (ProdottoModel prodotto : ordineModel.getProdottiID()) {
-                    prodottiStatement.setString(1, idOrdine);
-                    prodottiStatement.setString(2, prodotto.getProdottoID());
-                    prodottiStatement.setString(3, prodotto.getNomeProdotto());
-                    prodottiStatement.setDouble(4, prodotto.getPrezzo());
-                    prodottiStatement.addBatch();
-                }
-                prodottiStatement.executeBatch();
-            }
+            // Inserisci i dettagli dei prodotti venduti
+            salvaProdottiVenduti(conn, idOrdine, ordineModel.getProdottiID());
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante il salvataggio dell'ordine e dei prodotti venduti", e);
         } catch (SystemException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private String salvaDettagliOrdine(Connection conn, OrdineModel ordineModel) throws SQLException {
+        String ordineSql = "INSERT INTO dettagliordine (ordineID, emailCliente, pagamento, indirizzo, coupon, prezzo, dataAcquisto) " +
+                "VALUES (?, ?, ?, ?, ?, ?, CURRENT_DATE)";
+        String idOrdine = RandomStringUtils.randomAlphanumeric(8); // Genera un ID ordine casuale
+
+        try (PreparedStatement ordineStatement = conn.prepareStatement(ordineSql)) {
+            ordineStatement.setString(1, idOrdine);
+            ordineStatement.setString(2, ordineModel.getEmailCliente());
+            ordineStatement.setString(3, ordineModel.getPagamento());
+            ordineStatement.setString(4, ordineModel.getIndirizzo());
+            ordineStatement.setString(5, ordineModel.getCoupon());
+            ordineStatement.setDouble(6, ordineModel.getPrezzotot());
+            ordineStatement.executeUpdate();
+        }
+
+        return idOrdine;
+    }
+
+    private void salvaProdottiVenduti(Connection conn, String idOrdine, List<ProdottoModel> prodotti) throws SQLException {
+        String prodottiSql = "INSERT INTO ordine_prodotto (dettagliOrdine_ordineID, prodottoID, nome, prezzo) " +
+                "VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement prodottiStatement = conn.prepareStatement(prodottiSql)) {
+            prodottiStatement.setString(1, idOrdine); // Imposta una volta sola fuori dal ciclo
+
+            for (ProdottoModel prodotto : prodotti) {
+                prodottiStatement.setString(2, prodotto.getProdottoID());
+                prodottiStatement.setString(3, prodotto.getNomeProdotto());
+                prodottiStatement.setDouble(4, prodotto.getPrezzo());
+                prodottiStatement.addBatch();
+            }
+
+            prodottiStatement.executeBatch();
+        }
+    }
+
 
     public List<OrdineModel> getMyOrder(UserModel userM) {
         List<OrdineModel> ordini = new ArrayList<>();

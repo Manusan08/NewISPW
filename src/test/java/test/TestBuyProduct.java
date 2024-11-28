@@ -7,12 +7,14 @@ import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.enums.StatoProdotto;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class TestBuyProduct {
@@ -33,8 +35,7 @@ class TestBuyProduct {
         prodottoBean.setPrezzo(1322);
         prodottoBean.setDescrizione("molto bello");
 
-        userBean = new UserBean()
-        ;
+        userBean = new UserBean();
         userBean.setEmail("cliente1");
         userBean.setNome("Giacomini");
     }
@@ -54,5 +55,9 @@ class TestBuyProduct {
         // Esegui il metodo compra
         clienteFacade.compra(userBean, ordineBean);
 
-  }
+        // Asserzione per verificare lo stato del prodotto
+        assertEquals(StatoProdotto.ESAURITO, prodottoBean.getStato(), "Lo stato del prodotto dovrebbe essere aggiornato a VENDUTO.");
+
+
+    }
 }

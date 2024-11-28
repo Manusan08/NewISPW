@@ -33,8 +33,8 @@ exports it.uniroma2.ispw.view.graphicalcontroller.admin;
 
 
     // Esportare il pacchetto specifico per i controller FXML
-   // opens it.uniroma2.ispw.view.graphicalcontroller.cliente to javafx.fxml, javafx.graphics,javafx.base;
-   // opens it.uniroma2.ispw.view.graphicalcontroller.admin to javafx.fxml, javafx.graphics,javafx.base;
+
+
     opens it.uniroma2.ispw.bean to javafx.fxml, javafx.graphics,javafx.base;
     exports it.uniroma2.ispw.model.user;
 

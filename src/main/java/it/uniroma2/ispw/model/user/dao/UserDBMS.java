@@ -75,35 +75,36 @@ public class UserDBMS implements  UserDAO{
         return indirizzi;
     }
 
+
     @Override
     public UserModel takeDati(UserModel userM) {
-        ResultSet resultSet = null;
-        UserModel userModel;
+        String sql = "SELECT nascita, nome, cognome, role, email FROM Utenti WHERE email = ?;";
 
-        try (Connection conn = ConnectionDB.getConnection()){
-            String sql = "select nascita, nome , cognome, role, email from Utenti  where email=? ;";
-            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+        try (Connection conn = ConnectionDB.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
 
+            statement.setString(1, userM.getEmail());
 
+            return eseguiQueryEImpostaUtente(statement);
 
-                statement.setString(1, userM.getEmail());
-
-                resultSet = statement.executeQuery();
-                if (!resultSet.next()) throw new ItemNotFoundException("\nCredenziali errate!");
-                userModel = setUtenteFromResultSet(resultSet);
-
-
-            } catch (ItemNotFoundException e) {
-                throw new RuntimeException(e);
-            }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante la ricerca degli indirizzi", e);
+            throw new RuntimeException("Errore durante la ricerca degli utenti", e);
         } catch (SystemException e) {
+            throw new RuntimeException("Errore di sistema durante la connessione", e);
+        } catch (ItemNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return userModel;
-
     }
+
+    private UserModel eseguiQueryEImpostaUtente(PreparedStatement statement) throws SQLException, ItemNotFoundException {
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (!resultSet.next()) {
+                throw new ItemNotFoundException("\nCredenziali errate!");
+            }
+            return setUtenteFromResultSet(resultSet);
+        }
+    }
+
 
     @Override
     public void salvaPay(String paymentInfo, UserModel userModel) {
