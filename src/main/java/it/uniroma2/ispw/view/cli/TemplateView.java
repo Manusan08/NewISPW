@@ -50,9 +50,14 @@ public abstract class TemplateView {
 
         System.out.println();
         System.out.printf("%s%s%n", ANSI_CYAN, border);
-        System.out.printf("%" + ((width + headerText.length()) / 2) + "s%n", headerText);
+
+        // Calcolare la larghezza della formattazione e utilizzarla direttamente nel formato
+        int padding = (width + headerText.length()) / 2;
+        System.out.printf("%" + padding + "s%n", headerText);
+
         System.out.printf("%s%s%n", border, ANSI_RESET);
     }
+
 
     protected int operationMenu(String title, List<String> options) {
         Scanner scanner = new Scanner(System.in);
@@ -120,24 +125,11 @@ public abstract class TemplateView {
         printTableHeader(headers, columnWidths);
 
         // Print rows
-        for (T item : list) {
-            for (int i = 0; i < getters.size(); i++) {
-                try {
-                    String valueString = String.valueOf(getters.get(i).invoke(item));
-                    System.out.printf("%-" + columnWidths.get(i) + "s ", valueString);
-                } catch (Exception e) {
-                    System.out.printf("%-" + columnWidths.get(i) + "s ", "Errore");
-                }
-            }
-            System.out.println();
-        }
+
     }
 
     private void printTableHeader(List<String> headers, List<Integer> columnWidths) {
-        for (int i = 0; i < headers.size(); i++) {
-            // Utilizzare il format specifier senza concatenazione
-            System.out.printf("%s%-" + columnWidths.get(i) + "s%s ", ANSI_PURPLE, headers.get(i), ANSI_RESET);
-        }
+
         System.out.println();
 
         for (int width : columnWidths) {
