@@ -51,7 +51,6 @@ public abstract class TemplateView {
         System.out.println();
         System.out.printf("%s%s%n", ANSI_CYAN, border);
         System.out.printf("%" + ((width + headerText.length()) / 2) + "s%n", headerText);
-
         System.out.printf("%s%s%n", border, ANSI_RESET);
     }
 
@@ -126,11 +125,8 @@ public abstract class TemplateView {
                 try {
                     String valueString = String.valueOf(getters.get(i).invoke(item));
                     System.out.printf("%-" + columnWidths.get(i) + "s ", valueString);
-
                 } catch (Exception e) {
                     System.out.printf("%-" + columnWidths.get(i) + "s ", "Errore");
-
-
                 }
             }
             System.out.println();
@@ -139,12 +135,13 @@ public abstract class TemplateView {
 
     private void printTableHeader(List<String> headers, List<Integer> columnWidths) {
         for (int i = 0; i < headers.size(); i++) {
+            // Utilizzare il format specifier senza concatenazione
             System.out.printf("%s%-" + columnWidths.get(i) + "s%s ", ANSI_PURPLE, headers.get(i), ANSI_RESET);
-
         }
         System.out.println();
 
         for (int width : columnWidths) {
+            // Mantenere la linea divisoria senza concatenazione
             System.out.print("-".repeat(width) + " ");
         }
         System.out.println();

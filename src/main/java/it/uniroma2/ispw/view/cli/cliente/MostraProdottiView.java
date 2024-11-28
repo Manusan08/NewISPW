@@ -64,8 +64,7 @@ public class MostraProdottiView {
         String border = "-".repeat(width);
 
         System.out.printf("%n%s%n", border);
-        int leftPadding = (width - "Elenco Prodotti Disponibili".length()) / 2;
-        System.out.printf("%" + (leftPadding + "Elenco Prodotti Disponibili".length()) + "s%n", "Elenco Prodotti Disponibili");
+
 
         System.out.printf("%s%n", border);
     }
