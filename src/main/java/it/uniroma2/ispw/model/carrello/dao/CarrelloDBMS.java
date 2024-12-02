@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CarrelloDBMS implements CarrelloDAO{
     @Override
-    public void addToCart(ProdottoModel prodottoModel, UserModel userModel) {
+    public void addToCart(ProdottoModel prodottoModel, UserModel userModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "INSERT INTO carrello (idcarrello, prodottoid, Utenti_email) " + "VALUES (?, ?, ?)";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -29,15 +29,13 @@ public class CarrelloDBMS implements CarrelloDAO{
 
             }
         }catch (SQLException e) {
-            throw new RuntimeException("Errore durante il salvataggio della prenotazione", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
 
     }
 
     @Override
-    public List<ProdottoModel> getAllMyCar(UserModel userModel) {
+    public List<ProdottoModel> getAllMyCar(UserModel userModel) throws SystemException {
         List<ProdottoModel> prodottiNelCarrello = new ArrayList<>();
 
         try (Connection conn = ConnectionDB.getConnection()) {
@@ -62,16 +60,14 @@ public class CarrelloDBMS implements CarrelloDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante il recupero dei prodotti dal carrello", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
 
         return prodottiNelCarrello;
     }
 
     @Override
-    public void removeToCart(ProdottoModel prodottoM, UserModel userModel) {try (Connection conn = ConnectionDB.getConnection()) {
+    public void removeToCart(ProdottoModel prodottoM, UserModel userModel) throws SystemException {try (Connection conn = ConnectionDB.getConnection()) {
         String sql = "DELETE FROM carrello WHERE prodottoid = ? AND Utenti_email = ?";
 
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -82,16 +78,13 @@ public class CarrelloDBMS implements CarrelloDAO{
             statement.executeUpdate();
         }
     } catch (SQLException e) {
-        throw new RuntimeException("Errore durante la rimozione del prodotto dal carrello", e);
-    } catch (SystemException e) {
-        throw new RuntimeException(e);
-    }
+        throw new SystemException(e.getMessage());    }
 
 
     }
 
     @Override
-    public void svuotaCarrello(UserModel userModel) {
+    public void svuotaCarrello(UserModel userModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "DELETE FROM carrello WHERE Utenti_email = ?";
 
@@ -101,9 +94,7 @@ public class CarrelloDBMS implements CarrelloDAO{
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante lo svuotamento del carrello per l'utente: " + userModel.getEmail(), e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
 
     }

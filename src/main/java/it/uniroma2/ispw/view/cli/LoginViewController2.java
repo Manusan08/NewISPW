@@ -21,7 +21,7 @@ public class LoginViewController2 extends TemplateView{
         try {
             loginBean = this.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
         try {
             usrBean= loginController.login(loginBean);

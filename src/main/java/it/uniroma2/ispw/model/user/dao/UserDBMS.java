@@ -22,7 +22,7 @@ import java.util.List;
 
 public class UserDBMS implements  UserDAO{
     @Override
-    public List<String> takePagamento(UserModel userM) {
+    public List<String> takePagamento(UserModel userM) throws ItemNotFoundException, SystemException {
         List<String> pagamenti = new ArrayList<>();
         ResultSet resultSet = null;
 
@@ -41,15 +41,13 @@ public class UserDBMS implements  UserDAO{
                 }
 
             }} catch (SQLException e) {
-            throw new RuntimeException("Errore durante la ricerca dei metodi di pagamenti", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
         return pagamenti;
     }
 
     @Override
-    public List<String> takeIndirizzo(UserModel userM) {
+    public List<String> takeIndirizzo(UserModel userM) throws ItemNotFoundException, SystemException {
         List<String> indirizzi = new ArrayList<>();
         ResultSet resultSet = null;
 
@@ -68,16 +66,14 @@ public class UserDBMS implements  UserDAO{
                 }
 
             }} catch (SQLException e) {
-            throw new RuntimeException("Errore durante la ricerca degli indirizzi", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
         return indirizzi;
     }
 
 
     @Override
-    public UserModel takeDati(UserModel userM) {
+    public UserModel takeDati(UserModel userM) throws ItemNotFoundException, SystemException {
         String sql = "SELECT nascita, nome, cognome, role, email FROM Utenti WHERE email = ?;";
 
         try (Connection conn = ConnectionDB.getConnection();
@@ -87,12 +83,8 @@ public class UserDBMS implements  UserDAO{
 
             return eseguiQueryEImpostaUtente(statement);
 
-        } catch (SQLException e) {
-            throw new RuntimeException("Errore durante la ricerca degli utenti", e);
-        } catch (SystemException e) {
-            throw new RuntimeException("Errore di sistema durante la connessione", e);
-        } catch (ItemNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException  e ) {
+            throw new SystemException(e.getMessage());
         }
     }
 
@@ -107,7 +99,7 @@ public class UserDBMS implements  UserDAO{
 
 
     @Override
-    public void salvaPay(String paymentInfo, UserModel userModel) {
+    public void salvaPay(String paymentInfo, UserModel userModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "INSERT INTO pagamento (idpagamento, metodo, Utenti_email) " + "VALUES (?, ?, ?)";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -120,13 +112,11 @@ public class UserDBMS implements  UserDAO{
 
             }
         }catch (SQLException e) {
-            throw new RuntimeException("Errore durante il salvataggio della prenotazione", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
     }
     @Override
-    public void salvaAddress(String indirizzoInfo, UserModel userModel) {
+    public void salvaAddress(String indirizzoInfo, UserModel userModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "INSERT INTO indirizzo (idindirizzo, via, Utenti_email) " + "VALUES (?, ?, ?)";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -139,9 +129,7 @@ public class UserDBMS implements  UserDAO{
 
             }
         }catch (SQLException e) {
-            throw new RuntimeException("Errore durante il salvataggio della prenotazione", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
     }
 

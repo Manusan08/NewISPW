@@ -53,7 +53,7 @@ public class AccountAdminController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/VendiAdmin.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
     @FXML
@@ -64,7 +64,7 @@ public class AccountAdminController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class AccountAdminController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/AccountAdmin.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
     @Override

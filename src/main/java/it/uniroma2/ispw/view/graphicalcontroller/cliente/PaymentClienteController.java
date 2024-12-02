@@ -77,7 +77,7 @@ public class PaymentClienteController extends ControllerGrafico {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         }
 
@@ -87,7 +87,7 @@ public class PaymentClienteController extends ControllerGrafico {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         }
 
@@ -97,7 +97,7 @@ public class PaymentClienteController extends ControllerGrafico {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         }
 
@@ -119,7 +119,7 @@ public class PaymentClienteController extends ControllerGrafico {
                     // Ricarica la pagina corrente
                     ChangePage.getChangePage().cambiaPagina("/view/Cliente/PayamentClient.fxml", userBean);
                 } catch (SystemException | TexText e) {
-                    throw new RuntimeException(e);
+                    getAlert(e.getMessage());
                 }
             }
 
@@ -150,7 +150,7 @@ public class PaymentClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 }

@@ -149,7 +149,7 @@ public class CarrelloView extends TemplateView {
             } catch (SQLException | ItemNotFoundException | SystemException e) {
                 System.out.println("\u001B[31mErrore durante la modifica del carrello: " + e.getMessage() + "\u001B[0m");
             } catch (CampiVuotiExeption | IOException | LoginException e) {
-                throw new RuntimeException(e);
+                System.out.println("errore campi vuoti");
             }
         }
     }

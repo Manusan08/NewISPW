@@ -87,7 +87,7 @@ public class HomeClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
     @FXML
@@ -100,7 +100,7 @@ public class HomeClienteController extends ControllerGrafico {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         } else {
             showAlert("Errore","Per favore, seleziona un prodotto prima di procedere.");
@@ -138,7 +138,7 @@ public class HomeClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ public class HomeClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ public class HomeClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 

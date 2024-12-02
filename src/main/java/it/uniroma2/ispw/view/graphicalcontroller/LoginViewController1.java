@@ -61,7 +61,7 @@ public class LoginViewController1 implements Initializable{
         } catch (SystemException | IOException e) {
             getAlert("qualcosa è andato storto").showAndWait();
         } catch (TexText e) {
-            throw new RuntimeException(e);
+             getAlert(e.getMessage());
         }
 
 

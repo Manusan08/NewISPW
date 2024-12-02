@@ -2,6 +2,7 @@ package it.uniroma2.ispw.model.prodotto.dao;
 
 import it.uniroma2.ispw.model.prodotto.ProdottoModel;
 import it.uniroma2.ispw.utils.ConnectionDB;
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class ProdottoDBMS implements ProdottoDAO {
     @Override
-    public void cambiaStatoOccupato(ProdottoModel prodottoModel) {
+    public void cambiaStatoOccupato(ProdottoModel prodottoModel) throws SystemException {
 
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "update prodotto set stato='OCCUPATO' where prodottoID=?";
@@ -27,13 +28,12 @@ public class ProdottoDBMS implements ProdottoDAO {
                 statement.executeUpdate();
 
             }
-        } catch (SystemException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+        } catch ( SQLException e) {
+            throw new SystemException(e.getMessage());        }
     }
 
     @Override
-    public void cambiaStatoEsaurito(ProdottoModel prodottoModel) {
+    public void cambiaStatoEsaurito(ProdottoModel prodottoModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "DELETE FROM prodotto WHERE prodottoID = ?";
 
@@ -42,12 +42,11 @@ public class ProdottoDBMS implements ProdottoDAO {
                 statement.executeUpdate();
             }
         } catch (SystemException | SQLException e) {
-            throw new RuntimeException("Errore durante la rimozione del prodotto", e);
-        }
+            throw new SystemException(e.getMessage());        }
     }
 
     @Override
-    public void cambiaStatoDisponibile(ProdottoModel prodottoModel) {
+    public void cambiaStatoDisponibile(ProdottoModel prodottoModel) throws SystemException {
 
         try (Connection conn = ConnectionDB.getConnection()) {
             String sql = "update prodotto set stato='DISPONIBILE' where prodottoID=?";
@@ -61,13 +60,13 @@ public class ProdottoDBMS implements ProdottoDAO {
 
             }
         } catch (SystemException | SQLException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
 
     }
 
     @Override
-    public List<ProdottoModel> getAllProdDisp() throws SystemException {
+    public List<ProdottoModel> getAllProdDisp() throws SystemException, ItemNotFoundException {
         ResultSet resultSet = null;
         List<ProdottoModel> prodottoList = new ArrayList<>();
 
@@ -92,7 +91,7 @@ public class ProdottoDBMS implements ProdottoDAO {
                 } while (resultSet.next());
             }
         } catch ( SQLException e) {
-            throw new SystemException();
+            throw new ItemNotFoundException(e.getMessage());
         }
         return prodottoList;
     }

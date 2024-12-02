@@ -66,7 +66,7 @@ public class OrdineDBMS implements OrdineDAO{
     }
 
 
-    public List<OrdineModel> getMyOrder(UserModel userM) {
+    public List<OrdineModel> getMyOrder(UserModel userM) throws SystemException {
         List<OrdineModel> ordini = new ArrayList<>();
 
         try (Connection conn = ConnectionDB.getConnection()) {
@@ -95,16 +95,13 @@ public class OrdineDBMS implements OrdineDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante il recupero degli ordini dell'utente", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
-        }
+            throw new SystemException(e.getMessage());        }
 
         return ordini;
     }
 
     @Override
-    public List<ProdottoModel> getMyOrderProd(UserModel userM, OrdineModel ordineModel) {
+    public List<ProdottoModel> getMyOrderProd(UserModel userM, OrdineModel ordineModel) throws SystemException {
         List<ProdottoModel> prodotti = new ArrayList<>();
 
         try (Connection conn = ConnectionDB.getConnection()) {
@@ -129,10 +126,7 @@ public class OrdineDBMS implements OrdineDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante il recupero dei prodotti per l'ordine", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
-        }
+            throw new SystemException(e.getMessage());        }
 
         return prodotti;
     }

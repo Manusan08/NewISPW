@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CouponDBMS implements  CouponDAO{
     @Override
-    public List<CouponModel> getCoupon(UserModel cred) {
+    public List<CouponModel> getCoupon(UserModel cred) throws SystemException {
 
         List<CouponModel> couponModels = new ArrayList<>(); // Inizializziamo la lista dei coupon
         ResultSet resultSet = null;
@@ -42,10 +42,7 @@ public class CouponDBMS implements  CouponDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante la ricerca dei coupon", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
-        }
+            throw new SystemException(e.getMessage());        }
 
         return couponModels;
     }

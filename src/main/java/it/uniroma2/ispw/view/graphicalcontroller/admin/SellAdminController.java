@@ -39,7 +39,7 @@ public class SellAdminController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/AccountAdmin.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class SellAdminController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/VendiAdmin.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 

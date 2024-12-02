@@ -163,7 +163,7 @@ public class BuyClienteController extends ControllerGrafico {
                 // Se l'utente conferma, cambia pagina su processaOrdine.fxml
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml",userBean, ordineBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         }
 
@@ -198,7 +198,7 @@ public class BuyClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
@@ -208,8 +208,7 @@ public class BuyClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
-        }
+            getAlert(e.getMessage());        }
     }
 
     @FXML
@@ -218,7 +217,7 @@ public class BuyClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 
