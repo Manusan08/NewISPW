@@ -8,7 +8,7 @@ import it.uniroma2.ispw.utils.exception.SystemException;
 import java.util.List;
 
 public interface OrdineDAO {
-    void compra(OrdineModel ordineModel);
+    void compra(OrdineModel ordineModel) throws SystemException;
 
     List<OrdineModel> getMyOrder(UserModel userM) throws SystemException;
 

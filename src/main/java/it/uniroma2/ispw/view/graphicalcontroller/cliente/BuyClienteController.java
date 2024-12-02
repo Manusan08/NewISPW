@@ -296,7 +296,7 @@ public class BuyClienteController extends ControllerGrafico {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
             } catch (SystemException | TexText e) {
-                throw new RuntimeException(e);
+                getAlert(e.getMessage());
             }
         } else {
             showAlert("Errore","Per favore, seleziona un prodotto prima di procedere.");
@@ -310,7 +310,7 @@ public class BuyClienteController extends ControllerGrafico {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
         } catch (SystemException | TexText e) {
-            throw new RuntimeException(e);
+            getAlert(e.getMessage());
         }
     }
 }

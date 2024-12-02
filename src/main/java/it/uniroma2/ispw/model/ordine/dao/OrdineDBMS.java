@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdineDBMS implements OrdineDAO{
-    public void compra(OrdineModel ordineModel) {
+    public void compra(OrdineModel ordineModel) throws SystemException {
         try (Connection conn = ConnectionDB.getConnection()) {
             // Inserisci i dettagli dell'ordine
             String idOrdine = salvaDettagliOrdine(conn, ordineModel);
@@ -23,9 +23,7 @@ public class OrdineDBMS implements OrdineDAO{
             // Inserisci i dettagli dei prodotti venduti
             salvaProdottiVenduti(conn, idOrdine, ordineModel.getProdottiID());
         } catch (SQLException e) {
-            throw new RuntimeException("Errore durante il salvataggio dell'ordine e dei prodotti venduti", e);
-        } catch (SystemException e) {
-            throw new RuntimeException(e);
+            throw new SystemException(e.getMessage());
         }
     }
 
