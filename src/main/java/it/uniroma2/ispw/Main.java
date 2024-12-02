@@ -46,7 +46,7 @@ public class    Main extends Application {
         stage.show();
     }
 
-    public static void setPersistenceLayerAndUi() {
+    public static void setPersistenceLayerAndUi() throws SystemException {
         Conf conf = Conf.getConf();
         try (InputStream input = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
             Properties properties = new Properties();
@@ -67,7 +67,7 @@ public class    Main extends Application {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new SystemException("si è presentato un errore");
         }
 
     }
