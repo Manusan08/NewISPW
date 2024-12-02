@@ -24,6 +24,7 @@ import it.uniroma2.ispw.model.user.UserModel;
 import it.uniroma2.ispw.model.user.dao.UserDAO;
 import it.uniroma2.ispw.model.user.dao.UserDAOFactory;
 import it.uniroma2.ispw.model.user.dao.UserDAOFactoryImpl;
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class CompraController {
         ordineDAO = daoFactory3.getDao();
     }
 
-    public void addToCart(ProdottoBean selectedProdotto, UserBean userBean){
+    public void addToCart(ProdottoBean selectedProdotto, UserBean userBean) throws SystemException {
         ProdottoModel prodottoM = new ProdottoModel();
         prodottoM.setNomeProdotto(selectedProdotto.getProdottoID());
         prodottoM.setCategoria(selectedProdotto.getCategoria());
@@ -62,7 +63,7 @@ public class CompraController {
 
     }
 
-    public UserBean getModalita(UserBean cred) {
+    public UserBean getModalita(UserBean cred) throws SystemException, ItemNotFoundException {
         UserModel userM = new UserModel();
         userM.setEmail(cred.getEmail());
         userM.setRuolo(cred.getRuolo());
@@ -73,7 +74,7 @@ public class CompraController {
         return new UserBean(um.getEmail(), um.getRuolo(), um.getIndirizzo() , um.getPagamento());
     }
 
-    public List<ProdottoBean> getAllProdDisp() throws SystemException {
+    public List<ProdottoBean> getAllProdDisp() throws SystemException, ItemNotFoundException {
         List<ProdottoBean> prodottoBeans = new ArrayList<>();
         for (ProdottoModel c : prodottoDAO.getAllProdDisp()) {
             ProdottoBean cb = new ProdottoBean(c.getProdottoID(), c.getNomeProdotto(), c.getPrezzo(), c.getCategoria(), c.getDescrizione());
@@ -84,7 +85,7 @@ public class CompraController {
         return prodottoBeans;
     }
 
-    public CarrelloBean getAllMyCar(UserBean cred) {
+    public CarrelloBean getAllMyCar(UserBean cred) throws SystemException {
 
         // Inizializziamo l'istanza di UserModel e CarrelloModel
         UserModel userModel = new UserModel();
@@ -128,7 +129,7 @@ public class CompraController {
     }
 
 
-    public void removeToCart(ProdottoBean selectedProdotto, UserBean userBean) {
+    public void removeToCart(ProdottoBean selectedProdotto, UserBean userBean) throws SystemException {
         ProdottoModel prodottoM = new ProdottoModel();
         prodottoM.setNomeProdotto(selectedProdotto.getProdottoID());
         prodottoM.setCategoria(selectedProdotto.getCategoria());
@@ -148,7 +149,7 @@ public class CompraController {
         return prezzoTOT - factoryCoupon.createCoupon(coupon, prezzoTOT).couponprize();
     }
 
-    public void compra(UserBean userBean, OrdineBean ordineBean) {
+    public void compra(UserBean userBean, OrdineBean ordineBean) throws SystemException {
         // Inizializziamo l'istanza di UserModel e CarrelloModel
         UserModel userModel = new UserModel();
         userModel.setEmail(userBean.getEmail());

@@ -77,7 +77,7 @@ public class MyOrderView extends TemplateView {
         }
     }
 
-    private void viewOrderDetails(UserBean userBean, OrdineBean ordine) {
+    private void viewOrderDetails(UserBean userBean, OrdineBean ordine) throws SystemException {
 
 
 

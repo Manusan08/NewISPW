@@ -6,6 +6,7 @@ import it.uniroma2.ispw.bean.OrdineBean;
 import it.uniroma2.ispw.bean.ProdottoBean;
 import it.uniroma2.ispw.bean.UserBean;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.view.graphicalcontroller.ControllerGrafico;
@@ -32,17 +33,17 @@ public class ChangePage {
     }
 
     private Stage stage;
-    public void cambiaPagina(String s, UserBean userBean, List<ProdottoBean> selectedProdotto) throws SystemException, TexText {
+    public void cambiaPagina(String s, UserBean userBean, List<ProdottoBean> selectedProdotto) throws SystemException, TexText, ItemNotFoundException {
         cambiaPagina(s, userBean,  selectedProdotto, null, null);
     }
-    public void cambiaPagina(String s, UserBean userBean, OrdineBean ordineBean) throws SystemException, TexText {
+    public void cambiaPagina(String s, UserBean userBean, OrdineBean ordineBean) throws SystemException, TexText, ItemNotFoundException {
         cambiaPagina(s, userBean,  null, null, ordineBean);
     }
-    public void cambiaPagina(String s, UserBean userBean) throws SystemException, TexText {
+    public void cambiaPagina(String s, UserBean userBean) throws SystemException, TexText, ItemNotFoundException {
         cambiaPagina(s, userBean, null, null, null);
     }
 
-    public void cambiaPagina(String fxml, UserBean cred, List<ProdottoBean> prodottoBeans, ProdottoBean pb, OrdineBean ordineBean) throws SystemException, TexText {
+    public void cambiaPagina(String fxml, UserBean cred, List<ProdottoBean> prodottoBeans, ProdottoBean pb, OrdineBean ordineBean) throws SystemException, TexText, ItemNotFoundException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
         Scene scene = null;
 

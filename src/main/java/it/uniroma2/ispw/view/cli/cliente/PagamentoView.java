@@ -52,7 +52,7 @@ public class PagamentoView extends TemplateView {
         }
     }
 
-    private void popolaMetodiPagamento() {
+    private void popolaMetodiPagamento() throws SystemException, ItemNotFoundException {
         // Carica le modalità di pagamento disponibili per l'utente
         userBean = clienteFacade.getModalita(userBean);
 
@@ -66,7 +66,7 @@ public class PagamentoView extends TemplateView {
         }
     }
 
-    private void aggiungiMetodoPagamento(BufferedReader reader) throws IOException {
+    private void aggiungiMetodoPagamento(BufferedReader reader) throws IOException, SystemException {
         System.out.print("Inserisci il nome della carta: ");
         String nome = reader.readLine();
 

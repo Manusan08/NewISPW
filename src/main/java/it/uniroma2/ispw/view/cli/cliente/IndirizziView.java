@@ -54,7 +54,7 @@ public class IndirizziView extends TemplateView {
         }
     }
 
-    private void popolaIndirizzi() {
+    private void popolaIndirizzi() throws SystemException, ItemNotFoundException {
         userBean = clienteFacade.getModalita(userBean);
 
         if (userBean.getIndirizzo() != null) {
@@ -67,7 +67,7 @@ public class IndirizziView extends TemplateView {
         }
     }
 
-    private void aggiungiIndirizzo(BufferedReader reader) throws IOException {
+    private void aggiungiIndirizzo(BufferedReader reader) throws IOException, SystemException {
         System.out.print("\u001B[33mInserisci il nome della via: \u001B[0m");
         String via = reader.readLine();
 

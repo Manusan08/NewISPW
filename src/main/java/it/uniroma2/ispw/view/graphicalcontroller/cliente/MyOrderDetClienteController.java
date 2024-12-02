@@ -4,6 +4,7 @@ import it.uniroma2.ispw.bean.OrdineBean;
 import it.uniroma2.ispw.bean.ProdottoBean;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
@@ -71,7 +72,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -81,7 +82,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());        }
     }
 
@@ -90,7 +91,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -103,7 +104,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
     }
 
     @Override
-    public void setOrdineBean(OrdineBean ordineBean){
+    public void setOrdineBean(OrdineBean ordineBean) throws SystemException {
 
 
         prodottoBeans=clienteFacade.getMyOrderProd(userBean, ordineBean);
@@ -132,7 +133,7 @@ public class MyOrderDetClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }

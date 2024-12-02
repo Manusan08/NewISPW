@@ -3,6 +3,7 @@ import it.uniroma2.ispw.bean.*;
 import it.uniroma2.ispw.enums.Coupon;
 import it.uniroma2.ispw.utils.ChangePage;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
@@ -109,7 +110,7 @@ public class BuyClienteController extends ControllerGrafico {
     }
 
     @FXML
-    void buyAllIntoCart(ActionEvent event) {
+    void buyAllIntoCart(ActionEvent event) throws SystemException {
         // Crea un nuovo oggetto OrdineBean
         OrdineBean ordineBean = new OrdineBean();
 
@@ -162,7 +163,7 @@ public class BuyClienteController extends ControllerGrafico {
             try {
                 // Se l'utente conferma, cambia pagina su processaOrdine.fxml
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml",userBean, ordineBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         }
@@ -197,7 +198,7 @@ public class BuyClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -207,7 +208,7 @@ public class BuyClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());        }
     }
 
@@ -216,7 +217,7 @@ public class BuyClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -224,7 +225,7 @@ public class BuyClienteController extends ControllerGrafico {
 
 
     @Override
-    public void inizializza(UserBean cred) throws SystemException {
+    public void inizializza(UserBean cred) throws SystemException, ItemNotFoundException {
         this.userBean = cred;
          // Popola i choice box con i valori dell'utente
 
@@ -239,7 +240,7 @@ public class BuyClienteController extends ControllerGrafico {
 
     }
 
-    private void popolaChoiceBoxes(UserBean cred, int prezzoTOT) {
+    private void popolaChoiceBoxes(UserBean cred, int prezzoTOT) throws SystemException, ItemNotFoundException {
 
         userBean = clienteFacade.getModalita(cred);
         // Popola il ChoiceBox per i metodi di pagamento
@@ -287,7 +288,7 @@ public class BuyClienteController extends ControllerGrafico {
 
 
 
-    public void removeItem() {
+    public void removeItem() throws SystemException {
         ProdottoBean selectedProdotto = tableViewProdotto.getSelectionModel().getSelectedItem();
         if (selectedProdotto != null) {
             // Passa l'aula selezionata alla prossima pagina
@@ -295,7 +296,7 @@ public class BuyClienteController extends ControllerGrafico {
             try {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         } else {
@@ -309,7 +310,7 @@ public class BuyClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }

@@ -3,6 +3,7 @@ package it.uniroma2.ispw.view.graphicalcontroller.admin;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.view.graphicalcontroller.ControllerGrafico;
@@ -52,7 +53,7 @@ public class AccountAdminController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/VendiAdmin.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -63,7 +64,7 @@ public class AccountAdminController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -77,7 +78,7 @@ public class AccountAdminController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Admin/AccountAdmin.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }

@@ -4,6 +4,7 @@ package it.uniroma2.ispw.view.graphicalcontroller.cliente;
 
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
@@ -68,7 +69,7 @@ public class AddressClienteController extends ControllerGrafico {
     }
 
     @FXML
-    void saveAddress(ActionEvent event) {
+    void saveAddress(ActionEvent event) throws SystemException {
         // Ottieni i valori dai campi di testo
         String street = textName.getText();
         String city = cityId.getText();
@@ -83,7 +84,7 @@ public class AddressClienteController extends ControllerGrafico {
 
             // Ricarica la pagina corrente
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AddressClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
 
@@ -94,7 +95,7 @@ public class AddressClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -104,7 +105,7 @@ public class AddressClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -114,17 +115,17 @@ public class AddressClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
 
     @Override
-    public void inizializza(UserBean cred) throws SystemException {
+    public void inizializza(UserBean cred) throws SystemException, ItemNotFoundException {
         this.userBean=cred;
         popolaChoiceBoxes(cred); // Popola i choice box con i valori dell'utente
     }
-    private void popolaChoiceBoxes(UserBean cred) {
+    private void popolaChoiceBoxes(UserBean cred) throws SystemException, ItemNotFoundException {
 
         userBean = clienteFacade.getModalita(cred);
 
@@ -144,7 +145,7 @@ public class AddressClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }

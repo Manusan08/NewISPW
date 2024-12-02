@@ -21,7 +21,7 @@ public class MostraProdottiView {
     private boolean loopCond = true;  // Controllo del ciclo
     private final UserBean usrBean;
 
-    public MostraProdottiView(UserBean usrBean) throws IOException, SystemException {
+    public MostraProdottiView(UserBean usrBean) throws IOException, SystemException, ItemNotFoundException {
         this.usrBean = usrBean;  // UserBean passato al costruttore
         clienteFacade = new ClienteFacade();
         prodottoBeans = clienteFacade.getAllProdDisp(); // Carica inizialmente i prodotti disponibili
@@ -115,7 +115,7 @@ public class MostraProdottiView {
         }
     }
 
-    private void addToCart(ProdottoBean prodotto) {
+    private void addToCart(ProdottoBean prodotto) throws SystemException {
         // Aggiungi il prodotto al carrello
         clienteFacade.addToCart(prodotto, usrBean);
         System.out.printf("Prodotto aggiunto al carrello: %s%n", prodotto.getNomeProdotto());

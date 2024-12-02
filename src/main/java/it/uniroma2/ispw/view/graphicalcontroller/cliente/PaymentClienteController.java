@@ -3,6 +3,7 @@ package it.uniroma2.ispw.view.graphicalcontroller.cliente;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
@@ -76,7 +77,7 @@ public class PaymentClienteController extends ControllerGrafico {
             try {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         }
@@ -86,7 +87,7 @@ public class PaymentClienteController extends ControllerGrafico {
             try {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         }
@@ -96,13 +97,13 @@ public class PaymentClienteController extends ControllerGrafico {
             try {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         }
 
         @FXML
-        void onSave(ActionEvent event) {
+        void onSave(ActionEvent event) throws SystemException {
 
                 // Ottieni i valori dai campi di testo
                 String name = nameID.getText();
@@ -118,18 +119,18 @@ public class PaymentClienteController extends ControllerGrafico {
 
                     // Ricarica la pagina corrente
                     ChangePage.getChangePage().cambiaPagina("/view/Cliente/PayamentClient.fxml", userBean);
-                } catch (SystemException | TexText e) {
+                } catch (SystemException | TexText | ItemNotFoundException e) {
                     getAlert(e.getMessage());
                 }
             }
 
 
     @Override
-    public void inizializza(UserBean cred) throws SystemException {
+    public void inizializza(UserBean cred) throws SystemException, ItemNotFoundException {
         this.userBean=cred;
         popolaChoiceBoxes(cred); // Popola i choice box con i valori dell'utente
     }
-    private void popolaChoiceBoxes(UserBean cred) {
+    private void popolaChoiceBoxes(UserBean cred) throws SystemException, ItemNotFoundException {
 
         userBean = clienteFacade.getModalita(cred);
 
@@ -149,7 +150,7 @@ public class PaymentClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }

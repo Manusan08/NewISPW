@@ -4,6 +4,7 @@ import it.uniroma2.ispw.bean.ProdottoBean;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.ChangePage;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 import it.uniroma2.ispw.utils.exception.TexText;
 import it.uniroma2.ispw.utils.facade.ClienteFacade;
@@ -86,12 +87,12 @@ public class HomeClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/MessaggiPage.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
     @FXML
-    void onCompra(ActionEvent event) {
+    void onCompra(ActionEvent event) throws SystemException {
         ProdottoBean selectedProdotto = tableViewProdotto.getSelectionModel().getSelectedItem();
         if (selectedProdotto != null) {
             // Passa l'aula selezionata alla prossima pagina
@@ -99,7 +100,7 @@ public class HomeClienteController extends ControllerGrafico {
             try {
                 // Ottieni l'istanza di ChangePage e cambia la pagina
                 ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-            } catch (SystemException | TexText e) {
+            } catch (SystemException | TexText | ItemNotFoundException e) {
                 getAlert(e.getMessage());
             }
         } else {
@@ -137,7 +138,7 @@ public class HomeClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/BuyClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -153,7 +154,7 @@ public class HomeClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/Cliente/AccountClient.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
@@ -163,14 +164,14 @@ public class HomeClienteController extends ControllerGrafico {
         try {
             // Ottieni l'istanza di ChangePage e cambia la pagina
             ChangePage.getChangePage().cambiaPagina("/view/HomeCliente.fxml", userBean);
-        } catch (SystemException | TexText e) {
+        } catch (SystemException | TexText | ItemNotFoundException e) {
             getAlert(e.getMessage());
         }
     }
 
 
     @Override
-    public void inizializza(UserBean cred) throws SystemException {
+    public void inizializza(UserBean cred) throws SystemException, ItemNotFoundException {
         this.userBean = cred;
 
         prodottoBeans = clienteFacade.getAllProdDisp();

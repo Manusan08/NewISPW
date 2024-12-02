@@ -41,7 +41,7 @@ class TestBuyProduct {
     }
 
     @Test
-    void testCompraProdotto() {
+    void testCompraProdotto() throws SystemException {
         List<ProdottoBean> prodottoBeans = new ArrayList<>();
         prodottoBeans.add(prodottoBean);
 

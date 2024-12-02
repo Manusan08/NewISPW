@@ -17,6 +17,8 @@ import it.uniroma2.ispw.model.user.UserModel;
 import it.uniroma2.ispw.model.user.dao.UserDAO;
 import it.uniroma2.ispw.model.user.dao.UserDAOFactory;
 import it.uniroma2.ispw.model.user.dao.UserDAOFactoryImpl;
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
+import it.uniroma2.ispw.utils.exception.SystemException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class GestioneController {
         OrdineDAOFactory daoFactory3 = new OrdineDAOFactoryImpl();
         ordineDAO = daoFactory3.getDao();
     }
-    public UserBean takeDati(UserBean cred){
+    public UserBean takeDati(UserBean cred) throws SystemException, ItemNotFoundException {
         UserModel userModel = new UserModel();
         userModel.setEmail(cred.getEmail());
         UserModel um = userDAO.takeDati(userModel);
@@ -43,7 +45,7 @@ public class GestioneController {
         return new UserBean(um.getEmail(), um.getRuolo(), um.getNome(), um.getAnnoNascita(), um.getCognome());
     }
 
-    public void salvaPay(String paymentInfo, UserBean userBean) {
+    public void salvaPay(String paymentInfo, UserBean userBean) throws SystemException {
         UserModel userM = new UserModel();
         userM.setEmail(userBean.getEmail());
         userM.setRuolo(userBean.getRuolo());
@@ -55,7 +57,7 @@ public class GestioneController {
 
     }
 
-    public void salvaAddress(String indirizzoInfo, UserBean userBean) {
+    public void salvaAddress(String indirizzoInfo, UserBean userBean) throws SystemException {
         UserModel userM = new UserModel();
         userM.setEmail(userBean.getEmail());
         userM.setRuolo(userBean.getRuolo());
@@ -66,7 +68,7 @@ public class GestioneController {
 
 
 
-    public List<CouponBean> getCoupon(UserBean cred) {
+    public List<CouponBean> getCoupon(UserBean cred) throws SystemException {
         // Inizializziamo la lista dei modelli di coupon e impostiamo l'utente
         List<CouponModel> couponModels;
         UserModel userM = new UserModel();
@@ -92,7 +94,7 @@ public class GestioneController {
         return couponBeans;
     }
 
-    public List<OrdineBean> getMyOrder(UserBean cred) {
+    public List<OrdineBean> getMyOrder(UserBean cred) throws SystemException {
         List<OrdineModel> ordineModels;
         UserModel userM = new UserModel();
         userM.setEmail(cred.getEmail());
@@ -118,7 +120,7 @@ public class GestioneController {
         return ordineBeans;
     }
 
-    public List<ProdottoBean> getMyOrderProd(UserBean userBean, OrdineBean ordineBean) {
+    public List<ProdottoBean> getMyOrderProd(UserBean userBean, OrdineBean ordineBean) throws SystemException {
         List<ProdottoBean> prodottoBeans = new ArrayList<>();
         UserModel userM = new UserModel();
         userM.setEmail(userBean.getEmail());

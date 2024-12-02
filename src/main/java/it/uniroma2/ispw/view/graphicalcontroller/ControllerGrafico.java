@@ -6,6 +6,7 @@ import it.uniroma2.ispw.bean.ProdottoBean;
 import it.uniroma2.ispw.bean.UserBean;
 import it.uniroma2.ispw.utils.exception.AlertUtil;
 
+import it.uniroma2.ispw.utils.exception.ItemNotFoundException;
 import it.uniroma2.ispw.utils.exception.SystemException;
 
 
@@ -15,7 +16,7 @@ import java.util.List;
 public abstract class ControllerGrafico extends AlertUtil {
 
 
-    public abstract void inizializza(UserBean cred) throws SystemException;
+    public abstract void inizializza(UserBean cred) throws SystemException, ItemNotFoundException;
     public void setProdottoBeans(List<ProdottoBean> prodottoBeans) {
 
     }
@@ -24,7 +25,7 @@ public abstract class ControllerGrafico extends AlertUtil {
     public void setProdottoBean(ProdottoBean pb) {
     }
 
-    public void setOrdineBean(OrdineBean ordineBean) {
+    public void setOrdineBean(OrdineBean ordineBean) throws SystemException {
     }
 }
 /*Uso del polimorfismo per istanziare i vari controller grafici, in particolare tutti i controller grafici

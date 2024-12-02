@@ -26,7 +26,7 @@ public class ClienteView extends TemplateView {
     CarrelloView carrello;
     ImpostazioniView impostazioni;
 
-    public ClienteView(UserBean usrBean) throws IOException, SystemException {
+    public ClienteView(UserBean usrBean) throws IOException, SystemException, ItemNotFoundException {
         super(usrBean);  // Passa il UserBean alla superclasse TemplateView
         mostraProdotti = new MostraProdottiView(usrBean); // Passa usrBean anche a MostraProdottiView
         carrello = new CarrelloView(usrBean); // Passa usrBean anche a CarrelloView
